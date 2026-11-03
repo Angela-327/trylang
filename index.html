@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phishing Awareness Simulation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Always-visible label: this page is a training exercise -->
+  <div class="sim-banner" role="note">
+    <strong>Educational phishing simulation.</strong>
+    This is a training demo. Nothing you type is sent, saved, or stored.
+  </div>
+
+  <main class="stage">
+
+    <!-- A fake address bar. Real phishing pages often hide behind URLs like this one. -->
+    <div class="browser-bar" aria-hidden="true">
+      <span class="lock">&#128274;</span>
+      <span class="url">https://<span class="url-bad">cloudvale-secure-login.example-verify.net</span>/signin</span>
+    </div>
+
+    <!-- ========== STEP 1: THE FAKE LOGIN PAGE ========== -->
+    <section id="login-view" class="card" aria-labelledby="login-title">
+      <div class="brand">
+        <div class="brand-mark">C</div>
+        <span>Cloudvale</span>
+      </div>
+      <h1 id="login-title">Sign in to your account</h1>
+      <p class="sub">Your session expired. Please sign in again to continue.</p>
+
+      <form id="login-form" novalidate autocomplete="off">
+        <div class="field">
+          <label for="email">Email or username</label>
+          <input type="text" id="email" name="email" placeholder="you@example.com" autocomplete="off">
+          <p class="error" id="email-error" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="off">
+            <button type="button" id="toggle-pw" class="ghost" aria-label="Show password" aria-pressed="false">Show</button>
+          </div>
+          <p class="error" id="password-error" role="alert"></p>
+        </div>
+
+        <button type="submit" id="login-btn" class="primary">Log in</button>
+      </form>
+
+      <p class="hint">Tip: this is a demo. Please do not type a real password.</p>
+    </section>
+
+    <!-- ========== STEP 2: SIMULATED RESULT + LESSON (hidden until login) ========== -->
+    <section id="result-view" class="card wide hidden" aria-labelledby="result-title">
+      <div class="alert">
+        <h2 id="result-title">You just took the bait. This was a phishing simulation.</h2>
+        <p>
+          In a real attack, the credentials you submitted would now be in an
+          attacker's hands. In this demo, <strong>nothing was sent, saved, or
+          stored</strong>, and your password was cleared from the page immediately.
+        </p>
+        <dl class="log">
+          <div><dt>Login attempt recorded</dt><dd id="log-time">-</dd></div>
+          <div><dt>Attempts this session</dt><dd id="log-count">0</dd></div>
+          <div><dt>Password captured</dt><dd>No (never read or stored)</dd>
+          </div>
+        </dl>
+      </div>
+
+      <h3>What to learn from this</h3>
+      <div class="lessons">
+        <article>
+          <h4>Fake pages copy real ones</h4>
+          <p>Attackers copy logos, colors, and wording so the page looks familiar. Looks prove nothing, because anyone can copy a design in minutes.</p>
+        </article>
+        <article>
+          <h4>Check the URL first</h4>
+          <p>Look at the address bar before typing. The real site name sits right before the first single slash. In the URL above, the domain was <code>example-verify.net</code>, not Cloudvale.</p>
+        </article>
+        <article>
+          <h4>Never type a password on a suspicious site</h4>
+          <p>If anything feels off, close the page. Open the service by typing its address yourself or using your saved bookmark, then sign in there.</p>
+        </article>
+      </div>
+
+      <h3>How to spot a phishing attempt</h3>
+      <ul class="flags">
+        <li>The domain has extra words, hyphens, or misspellings (<code>cloudvale-secure-login</code>).</li>
+        <li>The message creates urgency: "Your account will be closed", "Session expired".</li>
+        <li>The link arrived in an unexpected email, text, or chat message.</li>
+        <li>The sender address does not match the company's real domain.</li>
+        <li>A padlock icon is shown. It only means the connection is encrypted, not that the site is trustworthy.</li>
+        <li>You are asked for passwords, codes, or payment details you would not normally give there.</li>
+      </ul>
+
+      <p class="tip"><strong>Extra protection:</strong> turn on multi-factor authentication and use a password manager. Password managers will not auto-fill on a look-alike domain, which is a built-in warning.</p>
+
+      <button type="button" id="reset-btn" class="primary">Try again</button>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
